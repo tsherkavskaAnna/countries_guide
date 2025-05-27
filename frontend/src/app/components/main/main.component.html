@@ -1,0 +1,27 @@
+<div
+  class="relative bg-slate-200 dark:bg-slate-900 min-h-screen overflow-hidden"
+>
+  <!-- HERO BACKGROUND -->
+  <div
+    class="absolute top-0 left-0 w-full h-[900px] bg-hero-gradient bg-cover bg-center z-0"
+  ></div>
+
+  <!-- CONTENT CONTAINER -->
+  <div class="relative z-10 pt-32">
+    <!-- SEARCHBAR CARD -->
+    <div class="container flex justify-center">
+      <div
+        class="h-16 bg-slate-50 dark:bg-slate-700 dark:border-slate-600 opacity-90 rounded-xl border-2 border-slate-300 text-start w-3/5 p-4 shadow-2xl"
+      >
+        <app-searchbar></app-searchbar>
+      </div>
+    </div>
+
+    <!-- COUNTRIES CARD ENTRA NELLA HERO -->
+    <div
+      class="container mt-52 relative z-10 bg-slate-50 dark:bg-slate-700 rounded-xl border-2 border-slate-300 dark:border-slate-600 text-start p-6 shadow-2xl"
+    >
+      <app-countries></app-countries>
+    </div>
+  </div>
+</div>

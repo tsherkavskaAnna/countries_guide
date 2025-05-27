@@ -1,0 +1,19 @@
+<div
+  class="bg-slate-300 dark:bg-slate-800 h-16 flex items-center px-20 justify-between shadow-b-xl"
+>
+  <h1 class="text-3xl font-semibold text-cyan-600 dark:text-white font-poppins">
+    {{ title }}
+  </h1>
+  <button (click)="toggleDark()">
+    <span
+      class="material-icons text-cyan-600 dark:text-white cursor-pointer"
+      *ngIf="!darkService.isDark()"
+      >dark_mode</span
+    >
+    <span
+      class="material-icons text-cyan-600 dark:text-white cursor-pointer"
+      *ngIf="darkService.isDark()"
+      >light_mode</span
+    >
+  </button>
+</div>
