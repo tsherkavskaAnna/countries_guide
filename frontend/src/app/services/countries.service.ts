@@ -16,4 +16,8 @@ export class CountriesService {
   searchCountry(query: string): Observable<any> {
     return this.http.get<any>(`https://restcountries.com/v3.1/name/${query}`);
   }
+
+  singleCountry(name: string): Observable<any> {
+    return this.http.get<any>(`https://restcountries.com/v3.1/name/${name}?fullText=true`);
+  }
 }

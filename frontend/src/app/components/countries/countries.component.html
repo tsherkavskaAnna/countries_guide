@@ -1,9 +1,18 @@
 <div class="container flex text-black h-auto font-raleway">
+  @if(loading) {
+  <div class="text-center grid-rows-1 grid text-blue-500 py-10">
+    Caricamento...
+  </div>
+  } @else if (error) {
+  <div class="text-center grid-rows-1 grid text-red-500 py-10">
+    {{ error }}
+  </div>
+  } @else {
   <div
     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 cursor-pointer"
   >
     <div
-      *ngFor="let country of countries()"
+      *ngFor="let country of countries"
       class="bg-white dark:bg-slate-600 p-4 rounded shadow hover:scale-105 transition-transform text-slate-500 dark:text-white flex flex-col-2 gap-4"
     >
       <img
@@ -20,4 +29,5 @@
       </div>
     </div>
   </div>
+  }
 </div>

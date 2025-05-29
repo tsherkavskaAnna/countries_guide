@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CountriesService } from '../../services/countries.service';
 
 @Component({
@@ -8,24 +8,40 @@ import { CountriesService } from '../../services/countries.service';
   templateUrl: './countries.component.html',
   styleUrl: './countries.component.css'
 })
-export class CountriesComponent implements OnInit {
+export class CountriesComponent implements OnChanges {
+  @Input() filter = '';
+
+  countries: any[] = [];
+  loading = true;
+  error = '';
+
   private countriesService = inject(CountriesService);
-  countries = signal<any[]>([]);
 
-  ngOnInit() {
-    this.loadAll();
+  ngOnChanges(changes: SimpleChanges): void {
+    this.loading = true;
+    if (this.filter) {
+      this.countriesService.searchCountry(this.filter).subscribe({
+        next: (res) => {
+          this.countries = res;
+          this.loading = false;
+        },
+        error: (err) => {
+          this.error = 'Nessun risultato trovato';
+          this.loading = false;
+        }
+      });
+    } else {
+      this.countriesService.getCountries().subscribe({
+        next: (res) => {
+          this.countries = res;
+          this.loading = false;
+        },
+        error: (err) => {
+          this.error = 'Errore con caricamenti lista di paesi';
+          this.loading = false;
+        }
+      })
+    }
   }
 
-  loadAll() {
-    this.countriesService.getCountries().subscribe(data => {
-      this.countries.set(data);
-    });
-  }
-
-  search(query: string) {
-    this.countriesService.searchCountry(query).subscribe({
-      next: (data) => this.countries.set(data),
-      error: () => this.countries.set([])
-    })
-  }
 }
